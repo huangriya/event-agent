@@ -25,7 +25,7 @@ let fixEvent = function (e) {
   return e
 }
 
-export const eventAgent = (evt, func) => {
+export const eventAgent = (evt, func, errFunc) => {
   const evt1 = fixEvent(evt)
   const actEl = evt1.currentTarget
   let el = evt1.target, actionType, isFind, attr
@@ -39,5 +39,5 @@ export const eventAgent = (evt, func) => {
     }
     el = el.parentNode
   }
-  isFind && func && func(el, attr)
+  isFind ? func && func(el, attr) : errFunc && errFunc(evt1)
 }
